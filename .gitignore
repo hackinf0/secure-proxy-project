@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+npm-debug.log
+.env
+
+# Docker
+*.pid
+*.sock
+docker-volume-data/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup/IDE files
+*.swp
+*.bak
+.idea/
+.vscode/
