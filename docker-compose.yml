@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: dvwa-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dvwa
+      MYSQL_USER: dvwa
+      MYSQL_PASSWORD: dvwa
+    networks:
+      - secure-net
+
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: dvwa
+    ports:
+      - "80"
+    environment:
+      MYSQL_USER: dvwa
+      MYSQL_PASSWORD: dvwa
+      MYSQL_DATABASE: dvwa
+      MYSQL_HOST: dvwa-mysql
+    depends_on:
+      - mysql
+    networks:
+      - secure-net
+
+  proxy-app:
+    build:
+      context: ./proxy
+    container_name: proxy-app
+    ports:
+      - "8080:8080"
+    environment:
+      ENABLE_SQLI_FILTER: "true"
+      ENABLE_XSS_FILTER: "true"
+    networks:
+      - secure-net
+
+networks:
+  secure-net:
+    external: true
