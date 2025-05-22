@@ -1,4 +1,5 @@
 module.exports = {
+  name: "Xss Filter",
   filterRequest: (req) => {
     const dangerousPatterns = [
       /<script.*?>.*?<\/script>/i,          // standard script tag
@@ -9,21 +10,21 @@ module.exports = {
       /<img.*?src\s*=\s*['"]?javascript:/i, // JS in img src
       /&#x.*?;/i,                           // hex entity encoding
       /&lt;script.*?&gt;/i,                 // encoded <
-    ];
-    const inputRaw = req.url + JSON.stringify(req.body || {}) + JSON.stringify(req.query || {});
-    let input;
+    ] 
+    const inputRaw = req.url + JSON.stringify(req.body || {}) + JSON.stringify(req.query || {}) 
+    let input 
     try {
-      input = decodeURIComponent(inputRaw);
+      input = decodeURIComponent(inputRaw) 
     } catch (e) {
-      input = inputRaw;
+      input = inputRaw 
     }
-    console.log('[XSS] Checking input:', input);
+    console.log('[XSS] Checking input:', input) 
     for (let pattern of dangerousPatterns) {
       if (pattern.test(input)) {
-        console.log('[!] XSS filter triggered:', input);
-        return false;
+        console.log('[!] XSS filter triggered:', input) 
+        return false 
       }
     }
-    return true;
+    return true 
   }
 }

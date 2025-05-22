@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Access Denied</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background-color: white;
+            border: 1px solid #ddd;
+            max-width: 600px;
+            margin: auto;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .icon {
+            font-size: 80px;
+            color: #f9a825;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+
+        .rid {
+            color: #aaa;
+            font-family: monospace;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        .highlight {
+            font-weight: bold;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="icon"><i class="fas fa-hand-paper"></i></div>
+        <h1>We're sorry, you are not allowed<br>to proceed</h1>
+        <p>Your request looks <span class="highlight">suspicious</span> and has been blocked by our security filter.</p>
+        <p>If you believe this was an error, please contact the administrator at <a href="mailto:test@gmail.com">test@gmail.com</a>.</p>
+        <div class="rid">RID: <span id="rid">ABCD1234XYZ9876</span></div>
+    </div>
+
+    <script>
+        // Optional: Generate a pseudo-random Request ID
+        document.getElementById('rid').textContent = 
+            Math.random().toString(36).substring(2, 10).toUpperCase() +
+            Math.random().toString(36).substring(2, 10).toUpperCase();
+    </script>
+</body>
+</html>

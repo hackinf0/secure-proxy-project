@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   mysql:
     image: mysql:5.7
@@ -36,6 +34,19 @@ services:
     environment:
       ENABLE_SQLI_FILTER: "true"
       ENABLE_XSS_FILTER: "true"
+      ENABLE_CMDI_FILTER: "true"
+
+    networks:
+      - secure-net
+
+  attacker:
+    build:
+      context: ./attacker
+    container_name: attacker
+    tty: true                
+    stdin_open: true 
+    depends_on:
+      - proxy-app
     networks:
       - secure-net
 
