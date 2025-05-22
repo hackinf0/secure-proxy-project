@@ -8,7 +8,7 @@ services:
       MYSQL_USER: dvwa
       MYSQL_PASSWORD: dvwa
     networks:
-      - secure-net
+      - backend
 
   dvwa:
     image: vulnerables/web-dvwa
@@ -23,7 +23,7 @@ services:
     depends_on:
       - mysql
     networks:
-      - secure-net
+      - backend
 
   proxy-app:
     build:
@@ -34,10 +34,11 @@ services:
     environment:
       ENABLE_SQLI_FILTER: "true"
       ENABLE_XSS_FILTER: "true"
-      ENABLE_CMDI_FILTER: "true"
+      ENABLE_CMDI_FILTER: "false"
 
     networks:
-      - secure-net
+      - frontend # in this way the attacker can only talk to dwva via our proxy
+      - backend
 
   attacker:
     build:
@@ -48,8 +49,9 @@ services:
     depends_on:
       - proxy-app
     networks:
-      - secure-net
+      - frontend
 
 networks:
-  secure-net:
-    external: true
+  backend:
+  frontend:
+
