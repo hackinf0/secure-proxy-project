@@ -19,7 +19,7 @@ This project demonstrates a proxy-based security filter protecting a vulnerable 
 Download the project  
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/hackinf0/secure-proxy-project
 cd secure-proxy-project
 ```
     
